@@ -65,7 +65,7 @@ public class UserServiceImp implements UserService {
      */
     @Override
     public UserDTO registerUser(UserRegisterDTO userData) {
-        // Validate if the email is already associated with another account
+        // Validate if the email is already associated with another user
         if (userRepository.findByEmail(userData.getEmail()) != null) {
             throw new EmailNotAvailableException();
         }
@@ -93,7 +93,7 @@ public class UserServiceImp implements UserService {
         // User to update
         User foundUser = findUserById(userId);
 
-        // Validate if the email was updated and is associated with another account
+        // Validate if the email was updated and is associated with another user
         if (!userData.getEmail().equalsIgnoreCase(foundUser.getEmail()) &&
                 userRepository.findByEmail(userData.getEmail()) != null) {
             throw new EmailNotAvailableException();
