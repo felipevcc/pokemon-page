@@ -18,6 +18,12 @@ public class PokemonDataDTO {
     // Pokémon name
     private String name;
 
+    // Small Pokémon image
+    private String smallImage;
+
+    // Large Pokémon image
+    private String largeImage;
+
     // A list of abilities that this Pokémon could potentially have
     private List<String> abilities;
 

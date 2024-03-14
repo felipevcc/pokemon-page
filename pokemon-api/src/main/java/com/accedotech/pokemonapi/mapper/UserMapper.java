@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Class to map objects from one class to another.
+ * User class to map objects from one class to another.
  * Contains the necessary mappings using the Model Mapper dependency.
  */
 @Configuration

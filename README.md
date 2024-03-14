@@ -52,6 +52,11 @@ ng serve --open
 ```
 
 
+## Note
+
+As a resource to make requests from Postman, this is the [`collection file`](https://github.com/felipevcc/pokemon-page/blob/main/PokemonApp.postman_collection.json).
+
+
 ## Author
 
 * Felipe Villamizar <a href="https://github.com/felipevcc" rel="nofollow"><img align="center" alt="github" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="24" /></a>

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 /**
  * Class to handle all exceptions.
- * Contains custom exceptions.
+ * Contains existing and custom exceptions.
  */
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -36,5 +36,32 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> emailNotAvailableException(EmailNotAvailableException e) {
         e.fillInStackTrace();
         return ResponseEntity.status(HttpStatus.CONFLICT).body("The email is already associated with another account");
+    }
+
+    /**
+     * Method to handle the exception when the PokeAPI service is not responding.
+     */
+    @ExceptionHandler(value = PokeAPINotAvailableException.class)
+    public ResponseEntity<String> pokeAPINotAvailableException(PokeAPINotAvailableException e) {
+        e.fillInStackTrace();
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body("PokeAPI is not responding, try again later");
+    }
+
+    /**
+     * Exception handling method when a pokémon does not exist in PokeAPI service storage.
+     */
+    @ExceptionHandler(value = PokemonNotFoundException.class)
+    public ResponseEntity<String> pokemonNotFoundException(PokemonNotFoundException e) {
+        e.fillInStackTrace();
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pokémon doesn't exists");
+    }
+
+    /**
+     * Method to handle the exception when a request input is invalid.
+     */
+    @ExceptionHandler(value = IllegalArgumentException.class)
+    public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e) {
+        e.fillInStackTrace();
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     }
 }
