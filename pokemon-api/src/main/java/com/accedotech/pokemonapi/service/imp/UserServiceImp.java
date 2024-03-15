@@ -1,12 +1,10 @@
 package com.accedotech.pokemonapi.service.imp;
 
-import com.accedotech.pokemonapi.dto.user.LoginDTO;
 import com.accedotech.pokemonapi.dto.user.UserDTO;
 import com.accedotech.pokemonapi.dto.user.UserRegisterDTO;
 import com.accedotech.pokemonapi.dto.user.UserUpdateDTO;
 import com.accedotech.pokemonapi.exceptions.EmailNotAvailableException;
 import com.accedotech.pokemonapi.exceptions.ForbiddenAccessException;
-import com.accedotech.pokemonapi.exceptions.InvalidPasswordException;
 import com.accedotech.pokemonapi.exceptions.UserNotFoundException;
 import com.accedotech.pokemonapi.mapper.UserMapper;
 import com.accedotech.pokemonapi.model.User;
@@ -35,25 +33,6 @@ public class UserServiceImp implements UserService {
 
     @Autowired
     BCryptPasswordEncoder passwordEncoder;
-
-    /**
-     * Method to give users access to all system functionalities.
-     */
-    @Override
-    public UserDTO userLogin(LoginDTO loginData) {
-        // Get the user by email
-        User user = userRepository.findByEmail(loginData.getEmail());
-        // Validate if the user exists
-        if (user == null) {
-            throw new UserNotFoundException();
-        }
-        // Check password
-        boolean successfulLogin = passwordEncoder.matches(loginData.getPassword(), user.getPasswordHash());
-        if (!successfulLogin) {
-            throw new InvalidPasswordException();
-        }
-        return userMapper.userToDTO(user);
-    }
 
     /**
      * Method to get a user by his unique identifier.
@@ -124,17 +103,12 @@ public class UserServiceImp implements UserService {
      * Method to update the user's password.
      */
     @Override
-    public UserDTO updatePassword(Long userId, String currentPassword, String newPassword) {
+    public UserDTO updatePassword(Long userId, String newPassword) {
         // Validate if the authenticated user is not the same as the one requested
         validateRequestedUserId(userId);
 
         // User to update
         User foundUser = findUserById(userId);
-
-        // Check current password
-        if (!passwordEncoder.matches(currentPassword, foundUser.getPasswordHash())) {
-            throw new InvalidPasswordException();
-        }
 
         // Save the new password encrypted
         foundUser.setPasswordHash(passwordEncoder.encode(newPassword));

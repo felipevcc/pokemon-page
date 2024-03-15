@@ -60,16 +60,12 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
-    @PutMapping("updatePassword/{id}")
+    @PutMapping("changePassword/{id}")
     public ResponseEntity<UserDTO> updatePassword(
             @PathVariable Long id,
             @RequestBody PasswordUpdateDTO passwordUpdateData
     ) {
-        UserDTO updatedUser = userService.updatePassword(
-                id,
-                passwordUpdateData.getCurrentPassword(),
-                passwordUpdateData.getNewPassword()
-        );
+        UserDTO updatedUser = userService.updatePassword(id, passwordUpdateData.getNewPassword());
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 }

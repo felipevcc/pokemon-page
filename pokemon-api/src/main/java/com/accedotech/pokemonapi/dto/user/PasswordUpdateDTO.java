@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor @NoArgsConstructor
 public class PasswordUpdateDTO {
-    // Old password
-    private String currentPassword;
-
     // New password
     private String newPassword;
 }

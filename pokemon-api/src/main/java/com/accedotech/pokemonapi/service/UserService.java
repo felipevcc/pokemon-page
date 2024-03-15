@@ -1,6 +1,5 @@
 package com.accedotech.pokemonapi.service;
 
-import com.accedotech.pokemonapi.dto.user.LoginDTO;
 import com.accedotech.pokemonapi.dto.user.UserDTO;
 import com.accedotech.pokemonapi.dto.user.UserRegisterDTO;
 import com.accedotech.pokemonapi.dto.user.UserUpdateDTO;
@@ -10,9 +9,6 @@ import com.accedotech.pokemonapi.dto.user.UserUpdateDTO;
  * Contains methods with the necessary functionalities for user management.
  */
 public interface UserService {
-
-    // User login method
-    UserDTO userLogin(LoginDTO loginData);
 
     // Method to get a user by id
     UserDTO getUserById(Long userId);
@@ -24,5 +20,5 @@ public interface UserService {
     UserDTO updateUser(Long userId, UserUpdateDTO userData);
 
     // Method to update the user's password
-    UserDTO updatePassword(Long userId, String currentPassword, String newPassword);
+    UserDTO updatePassword(Long userId, String newPassword);
 }
