@@ -5,6 +5,7 @@ import com.accedotech.pokemonapi.dto.user.UserDTO;
 import com.accedotech.pokemonapi.dto.user.UserRegisterDTO;
 import com.accedotech.pokemonapi.dto.user.UserUpdateDTO;
 import com.accedotech.pokemonapi.exceptions.EmailNotAvailableException;
+import com.accedotech.pokemonapi.exceptions.ForbiddenAccessException;
 import com.accedotech.pokemonapi.exceptions.InvalidPasswordException;
 import com.accedotech.pokemonapi.exceptions.UserNotFoundException;
 import com.accedotech.pokemonapi.mapper.UserMapper;
@@ -12,8 +13,12 @@ import com.accedotech.pokemonapi.model.User;
 import com.accedotech.pokemonapi.repository.UserRepository;
 import com.accedotech.pokemonapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Objects;
 
 /**
  * User management service.
@@ -55,6 +60,9 @@ public class UserServiceImp implements UserService {
      */
     @Override
     public UserDTO getUserById(Long userId) {
+        // Validate if the authenticated user is not the same as the one requested
+        validateRequestedUserId(userId);
+
         // Get the requested user
         User foundUser = findUserById(userId);
         return userMapper.userToDTO(foundUser);
@@ -90,6 +98,9 @@ public class UserServiceImp implements UserService {
      */
     @Override
     public UserDTO updateUser(Long userId, UserUpdateDTO userData) {
+        // Validate if the authenticated user is not the same as the one requested
+        validateRequestedUserId(userId);
+
         // User to update
         User foundUser = findUserById(userId);
 
@@ -114,6 +125,9 @@ public class UserServiceImp implements UserService {
      */
     @Override
     public UserDTO updatePassword(Long userId, String currentPassword, String newPassword) {
+        // Validate if the authenticated user is not the same as the one requested
+        validateRequestedUserId(userId);
+
         // User to update
         User foundUser = findUserById(userId);
 
@@ -139,5 +153,28 @@ public class UserServiceImp implements UserService {
             throw new UserNotFoundException();
         }
         return foundUser;
+    }
+
+    /**
+     * Method to get the current authenticated user.
+     */
+    private User getAuthenticatedUser() {
+        // Get the current authentication of the security context
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        // Get the email of the authenticated user
+        String userEmail = authentication.getName();
+
+        // Return of authenticated user
+        return userRepository.findByEmail(userEmail);
+    }
+
+    /**
+     * Method to validate if the authenticated user is not the same as the requested one.
+     */
+    private void validateRequestedUserId(Long requestedUserId) {
+        if (!Objects.equals(getAuthenticatedUser().getUserId(), requestedUserId)) {
+            throw new ForbiddenAccessException();
+        }
     }
 }
