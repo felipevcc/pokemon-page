@@ -1,3 +1,4 @@
+// API endpoints related to users
 export enum UserEndpoints {
   UserLogin = "/user/login",
   UserData = "/user/data",

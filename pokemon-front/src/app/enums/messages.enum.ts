@@ -1,3 +1,4 @@
+// User feedback messages
 export enum Messages {
   ERROR_GET = "An error occurred while obtaining the data",
 
@@ -8,4 +9,5 @@ export enum Messages {
   ERROR_UPDATE = "An error occurred while updating the data",
 
   INCORRECT_CREDETIALS = "Invalid credentials",
+  NOT_AUTHENTICATED = "You must log in",
 }
