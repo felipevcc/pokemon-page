@@ -1,10 +1,15 @@
 package com.accedotech.pokemonapi.controller;
 
+import com.accedotech.pokemonapi.config.security.JwtUtil;
 import com.accedotech.pokemonapi.dto.user.*;
 import com.accedotech.pokemonapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -13,16 +18,25 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/user")
-@CrossOrigin
 public class UserController {
 
     @Autowired
     UserService userService;
 
+    @Autowired
+    JwtUtil jwtUtil;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
     @PostMapping("/login")
-    public ResponseEntity<UserDTO> userLogin(@RequestBody LoginDTO loginData) {
-        UserDTO user = userService.userLogin(loginData);
-        return ResponseEntity.status(HttpStatus.OK).body(user);
+    public ResponseEntity<Void> userLogin(@RequestBody LoginDTO loginData) {
+        // Authentication with its validation
+        UsernamePasswordAuthenticationToken login = new UsernamePasswordAuthenticationToken(loginData.getEmail(), loginData.getPassword());
+        Authentication authentication = authenticationManager.authenticate(login);
+        // Generate JWT
+        String jwt = jwtUtil.create(loginData.getEmail());
+        return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.AUTHORIZATION, jwt).build();
     }
 
     @GetMapping("/{id}")
@@ -31,7 +45,7 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
-    @PostMapping
+    @PostMapping("/signup")
     public ResponseEntity<UserDTO> userRegistration(@RequestBody UserRegisterDTO userData) {
         UserDTO createdUser = userService.registerUser(userData);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/pokemon")
-@CrossOrigin
 public class PokemonController {
 
     @Autowired

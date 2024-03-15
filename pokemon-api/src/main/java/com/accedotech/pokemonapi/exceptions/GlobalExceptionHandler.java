@@ -17,7 +17,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = UserNotFoundException.class)
     public ResponseEntity<String> userNotFoundException(UserNotFoundException e) {
         e.fillInStackTrace();
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User doesn't exists");
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User doesn't exist");
     }
 
     /**
@@ -63,5 +63,14 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> illegalArgumentException(IllegalArgumentException e) {
         e.fillInStackTrace();
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    }
+
+    /**
+     * Method to handle the exception when a request input is invalid.
+     */
+    @ExceptionHandler(value = ForbiddenAccessException.class)
+    public ResponseEntity<String> forbiddenAccessException(ForbiddenAccessException e) {
+        e.fillInStackTrace();
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Insufficient permissions for this action");
     }
 }
