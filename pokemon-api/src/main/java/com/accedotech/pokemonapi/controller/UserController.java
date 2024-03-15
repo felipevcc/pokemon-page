@@ -39,9 +39,9 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.AUTHORIZATION, jwt).build();
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<UserDTO> getUserById(@PathVariable Long id) {
-        UserDTO user = userService.getUserById(id);
+    @GetMapping("/getData")
+    public ResponseEntity<UserDTO> getUserData() {
+        UserDTO user = userService.getUserData();
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
 
@@ -51,21 +51,15 @@ public class UserController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdUser);
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<UserDTO> userUpdate(
-            @PathVariable Long id,
-            @RequestBody UserUpdateDTO userData
-    ) {
-        UserDTO updatedUser = userService.updateUser(id, userData);
+    @PutMapping("/update")
+    public ResponseEntity<UserDTO> userUpdate(@RequestBody UserUpdateDTO userData) {
+        UserDTO updatedUser = userService.updateUser(userData);
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 
-    @PutMapping("changePassword/{id}")
-    public ResponseEntity<UserDTO> updatePassword(
-            @PathVariable Long id,
-            @RequestBody PasswordUpdateDTO passwordUpdateData
-    ) {
-        UserDTO updatedUser = userService.updatePassword(id, passwordUpdateData.getNewPassword());
+    @PutMapping("/changePassword")
+    public ResponseEntity<UserDTO> updatePassword(@RequestBody PasswordUpdateDTO passwordUpdateData) {
+        UserDTO updatedUser = userService.updatePassword(passwordUpdateData.getNewPassword());
         return ResponseEntity.status(HttpStatus.OK).body(updatedUser);
     }
 }

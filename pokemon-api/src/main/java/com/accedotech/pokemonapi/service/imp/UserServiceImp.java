@@ -38,12 +38,9 @@ public class UserServiceImp implements UserService {
      * Method to get a user by his unique identifier.
      */
     @Override
-    public UserDTO getUserById(Long userId) {
-        // Validate if the authenticated user is not the same as the one requested
-        validateRequestedUserId(userId);
-
-        // Get the requested user
-        User foundUser = findUserById(userId);
+    public UserDTO getUserData() {
+        // Get the authenticated user
+        User foundUser = getAuthenticatedUser();
         return userMapper.userToDTO(foundUser);
     }
 
@@ -76,12 +73,9 @@ public class UserServiceImp implements UserService {
      * Method to update user information.
      */
     @Override
-    public UserDTO updateUser(Long userId, UserUpdateDTO userData) {
-        // Validate if the authenticated user is not the same as the one requested
-        validateRequestedUserId(userId);
-
+    public UserDTO updateUser(UserUpdateDTO userData) {
         // User to update
-        User foundUser = findUserById(userId);
+        User foundUser = getAuthenticatedUser();
 
         // Validate if the email was updated and is associated with another user
         if (!userData.getEmail().equalsIgnoreCase(foundUser.getEmail()) &&
@@ -103,30 +97,15 @@ public class UserServiceImp implements UserService {
      * Method to update the user's password.
      */
     @Override
-    public UserDTO updatePassword(Long userId, String newPassword) {
-        // Validate if the authenticated user is not the same as the one requested
-        validateRequestedUserId(userId);
-
+    public UserDTO updatePassword(String newPassword) {
         // User to update
-        User foundUser = findUserById(userId);
+        User foundUser = getAuthenticatedUser();
 
         // Save the new password encrypted
         foundUser.setPasswordHash(passwordEncoder.encode(newPassword));
         userRepository.save(foundUser);
 
         return userMapper.userToDTO(foundUser);
-    }
-
-    /**
-     * Method to get a stored user and validate if it exists.
-     */
-    private User findUserById(Long userId) {
-        User foundUser = userRepository.findById(userId).orElse(null);
-        // Validate if user does not exist
-        if (foundUser == null) {
-            throw new UserNotFoundException();
-        }
-        return foundUser;
     }
 
     /**
@@ -144,11 +123,14 @@ public class UserServiceImp implements UserService {
     }
 
     /**
-     * Method to validate if the authenticated user is not the same as the requested one.
+     * Method to get a stored user and validate if it exists.
      */
-    private void validateRequestedUserId(Long requestedUserId) {
-        if (!Objects.equals(getAuthenticatedUser().getUserId(), requestedUserId)) {
-            throw new ForbiddenAccessException();
+    private User findUserById(Long userId) {
+        User foundUser = userRepository.findById(userId).orElse(null);
+        // Validate if user does not exist
+        if (foundUser == null) {
+            throw new UserNotFoundException();
         }
+        return foundUser;
     }
 }

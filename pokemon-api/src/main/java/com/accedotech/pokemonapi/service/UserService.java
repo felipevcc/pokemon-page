@@ -10,15 +10,15 @@ import com.accedotech.pokemonapi.dto.user.UserUpdateDTO;
  */
 public interface UserService {
 
-    // Method to get a user by id
-    UserDTO getUserById(Long userId);
+    // Method to get user data
+    UserDTO getUserData();
 
     // Method to register a new user in the system
     UserDTO registerUser(UserRegisterDTO userData);
 
     // Method to update user information
-    UserDTO updateUser(Long userId, UserUpdateDTO userData);
+    UserDTO updateUser(UserUpdateDTO userData);
 
     // Method to update the user's password
-    UserDTO updatePassword(Long userId, String newPassword);
+    UserDTO updatePassword(String newPassword);
 }
