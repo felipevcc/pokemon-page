@@ -7,6 +7,7 @@ import com.accedotech.pokemonapi.exceptions.PokeAPINotAvailableException;
 import com.accedotech.pokemonapi.exceptions.PokemonNotFoundException;
 import com.accedotech.pokemonapi.mapper.PokemonMapper;
 import com.accedotech.pokemonapi.service.PokemonService;
+import com.accedotech.pokemonapi.util.PokemonDataHelper;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,18 +82,16 @@ public class PokemonServiceImp implements PokemonService {
 
             PokemonDataDTO pokemonData = new PokemonDataDTO();
             pokemonData.setPokemonId(pokemonId);
-            pokemonData.setName(jsonObject.getString("name"));
+            pokemonData.setName(jsonObject.optString("name", null));
 
             // Pokémon images
-            JSONObject pokemonImages = jsonObject.getJSONObject("sprites");
-            pokemonData.setSmallImage(pokemonImages.getString("front_default"));
-            pokemonData.setLargeImage(pokemonImages.getJSONObject("other").getJSONObject("dream_world").getString("front_default"));
+            PokemonDataHelper.setPokemonImages(jsonObject, pokemonData);
 
-            pokemonData.setAbilities(getPokemonAbilities(jsonObject));
-            pokemonData.setBaseExperience(jsonObject.getInt("base_experience"));
-            pokemonData.setCry(jsonObject.getJSONObject("cries").getString("latest"));
-            pokemonData.setTypes(getPokemonTypes(jsonObject));
-            pokemonData.setWeight(jsonObject.getInt("weight"));
+            PokemonDataHelper.setPokemonAbilities(jsonObject, pokemonData);
+            pokemonData.setBaseExperience(jsonObject.optInt("base_experience", -1));
+            pokemonData.setCry(jsonObject.getJSONObject("cries").optString("latest", null));
+            PokemonDataHelper.setPokemonTypes(jsonObject, pokemonData);
+            pokemonData.setWeight(jsonObject.optInt("weight", -1));
 
             return pokemonData;
         } catch (HttpClientErrorException.NotFound e) {
@@ -102,41 +101,5 @@ public class PokemonServiceImp implements PokemonService {
             e.fillInStackTrace();
             throw new PokeAPINotAvailableException();
         }
-    }
-
-    /**
-     * Method to obtain a pokemon's abilities.
-     */
-    private List<String> getPokemonAbilities(JSONObject jsonObject) {
-        // Get the ability array
-        JSONArray abilities = jsonObject.getJSONArray("abilities");
-
-        // List to store ability names
-        List<String> abilityNames = new ArrayList<>();
-
-        // Get ability names
-        for (int i = 0; i < abilities.length(); i++) {
-            JSONObject ability = abilities.getJSONObject(i).getJSONObject("ability");
-            abilityNames.add(ability.getString("name"));
-        }
-        return abilityNames;
-    }
-
-    /**
-     * Method to obtain a pokemon's types.
-     */
-    private List<String> getPokemonTypes(JSONObject jsonObject) {
-        // Get the type array
-        JSONArray types = jsonObject.getJSONArray("types");
-
-        // List to store type names
-        List<String> typeNames = new ArrayList<>();
-
-        // Get type names
-        for (int i = 0; i < types.length(); i++) {
-            JSONObject ability = types.getJSONObject(i).getJSONObject("type");
-            typeNames.add(ability.getString("name"));
-        }
-        return typeNames;
     }
 }

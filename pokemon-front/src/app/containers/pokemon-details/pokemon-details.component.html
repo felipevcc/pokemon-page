@@ -1,1 +1,88 @@
-<p>pokemon-details works!</p>
+<app-navbar></app-navbar>
+
+<div *ngIf="isLoading; else contentBlock">
+  <!-- <div class="loading-spinner">
+    Cargando...
+  </div> -->
+</div>
+
+<ng-template #contentBlock>
+
+  <div class="pokemonDetails-container">
+
+    <button pButton type="button" (click)="onPokemonsClick()" class="back-btn p-button-raised" label="View all Pokémons"></button>
+    
+    <div *ngIf="pokemon; else elseBlock">
+    
+      <div class="pokemonDetails-container__top">
+        <h2 class="pokemonDetails-container__top__title">{{ pokemon.name }}</h2>
+      </div>
+
+
+      <div class="pokemonData-container">
+
+        <div class="left-data">
+
+          <div class="left-data__img">
+            <img [src]="pokemon.largeImage || pokemon.smallImage || 'assets/images/pokeball.png'" alt="Pokémon image">
+          </div>
+
+          <audio controls [volume]=".2">
+            <source [src]="pokemon.cry" type="audio/ogg">
+            Your browser does not support the audio element.
+          </audio>
+
+        </div>
+
+        <div class="right-data">
+
+          <div class="right-data__img">
+            <img [src]="pokemon.smallImage || pokemon.largeImage || 'assets/images/pokeball.png'" alt="Pokémon image">
+          </div>
+
+          <div class="right-data__abilities">
+            <h3>Abilities</h3>
+            <ul>
+              <li *ngFor="let ability of pokemon.abilities">
+                {{ ability }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="right-data__types">
+            <h3>Types</h3>
+            <ul>
+              <li *ngFor="let type of pokemon.types">
+                {{ type }}
+              </li>
+            </ul>
+          </div>
+
+          <div class="right-data__base-experience">
+            <h3>Base experience</h3>
+            <p>{{ pokemon.baseExperience >= 0 ? pokemon.baseExperience : "No value"  }}</p>
+          </div>
+
+          <div class="right-data__weight">
+            <h3>Weight</h3>
+            <p>{{ pokemon.weight >= 0 ? pokemon.weight : "No value" }}</p>
+          </div>
+          
+
+        </div>
+      </div>
+
+    </div>
+    
+    <ng-template #elseBlock>
+      <div class="pokemonDetailsNotFound">
+      </div>
+    </ng-template>
+    
+    <p-messages></p-messages>
+
+  </div>
+  
+  <app-footer></app-footer>
+
+</ng-template>

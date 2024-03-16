@@ -4,7 +4,7 @@ import { Messages } from '@enums/messages.enum';
 import { Paths } from '@enums/paths.enum';
 import { PokemonPage } from '@models/pokemon/pokemon-page.interface';
 import { PokemonService } from '@services/pokemon/pokemon.service';
-import { Message } from 'primeng/api';
+import { MessageService } from 'primeng/api';
 
 @Component({
   selector: 'app-pokemons',
@@ -25,11 +25,10 @@ export class PokemonsComponent {
 
   isLoading = true;
 
-  messages: Message[] = [];
-
   constructor(
     private router: Router,
-    private pokemonService: PokemonService
+    private pokemonService: PokemonService,
+    private messageService: MessageService
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +37,8 @@ export class PokemonsComponent {
   }
 
   getPokemons(): void {
+    this.messageService.clear();
+
     this.pokemonService.getPokemons(this.pokemonsPage.page, this.pokemonsPage.pageSize)
       .subscribe({
         next: (data: PokemonPage) => {
@@ -48,10 +49,10 @@ export class PokemonsComponent {
           this.isLoading = false;
           console.error(error);
           let msg: string = Messages.ERROR_GET;
-          if (error.error && error.error.message) {
-            msg = error.error.message;
+          if (error.error) {
+            msg = error.error;
           }
-          this.messages = [{ severity: 'error', summary: 'Error', detail: msg}];
+          this.messageService.add({severity: 'error', summary: 'Error', detail: msg});
         }
       });
   }

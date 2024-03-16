@@ -30,10 +30,10 @@
     <ng-template #elseBlock>
       <div class="pokemonsNotFound">
         <button pButton type="button" [routerLink]="pokemonsPath" class="back-btn p-button-raised p-button-rounded" label="Retry"></button>
-        <p-messages [(value)]="messages" ></p-messages>
       </div>
     </ng-template>
-
+    
+    <p-messages></p-messages>
   </div>
   
   <app-footer></app-footer>
