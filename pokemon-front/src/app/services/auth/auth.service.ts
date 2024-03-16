@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { UserEndpoints } from '@enums/user-endpoints.enum';
 import { environment } from '@env/environment';
+import { checkToken } from '@interceptors/token.interceptor';
 import { UserLoginReq } from '@models/user/user-login-req.interface';
 import { UserRegisterReq } from '@models/user/user-register-req.interface';
 import { UserService } from '@services/user/user.service';
@@ -60,7 +61,10 @@ export class AuthService {
     if (!this.cookieService.check('jwtToken')) return false;
 
     // Validate if the token is valid
-    this.userService.getUserData().subscribe({
+    this.http.get(
+      `${environment.apiUrl}${UserEndpoints.IsAuthenticated}`,
+      { context: checkToken() }
+    ).subscribe({
       next: (data) => {
         return true;
       },
@@ -69,7 +73,6 @@ export class AuthService {
         return false;
       }
     });
-
     return false;
   }
 

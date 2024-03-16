@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -37,6 +38,12 @@ public class UserController {
         // Generate JWT
         String jwt = jwtUtil.create(loginData.getEmail());
         return ResponseEntity.status(HttpStatus.OK).header(HttpHeaders.AUTHORIZATION, jwt).build();
+    }
+
+    @GetMapping("/isAuthenticated")
+    public ResponseEntity<Void> isAuthenticated() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
     @GetMapping("/getData")

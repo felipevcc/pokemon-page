@@ -1,1 +1,42 @@
-<p>pokemons works!</p>
+<app-navbar></app-navbar>
+
+<div *ngIf="isLoading; else contentBlock">
+  <!-- <div class="loading-spinner">
+    Cargando...
+  </div> -->
+</div>
+
+<ng-template #contentBlock>
+
+  <div class="pokemons">
+
+    <div class="pokemons__top">
+      <h2 class="pokemons__top__title">Pokémons</h2>
+    </div>
+
+    <div *ngIf="pokemonsPage.pokemons; else elseBlock">
+
+      <div class="page">
+        <div class="cards-grid">
+          <div class="cards-grid__card" *ngFor="let pokemon of pokemonsPage.pokemons" (click)="onPokemonClick(pokemon.pokemonId)">
+            {{ pokemon.name }}
+          </div>
+        </div>
+        <p-paginator (onPageChange)="onPageChange($event)" [rows]="pokemonsPage.pageSize" [totalRecords]="pokemonsPage.totalPokemons"></p-paginator>
+      </div>
+
+    </div>
+    
+    <ng-template #elseBlock>
+      <div class="pokemonsNotFound">
+        <button pButton type="button" [routerLink]="pokemonsPath" class="back-btn p-button-raised p-button-rounded" label="Retry"></button>
+        <p-messages [(value)]="messages" ></p-messages>
+      </div>
+    </ng-template>
+
+  </div>
+  
+  <app-footer></app-footer>
+
+</ng-template>
+
