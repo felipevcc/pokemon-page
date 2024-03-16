@@ -11,6 +11,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { MessagesModule } from 'primeng/messages';
 import { MenubarModule } from 'primeng/menubar';
 import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from '@containers/login/login.component';
@@ -23,6 +24,7 @@ import { NavbarComponent } from '@components/navbar/navbar.component';
 import { FooterComponent } from '@components/footer/footer.component';
 
 import { TokenInterceptor } from '@interceptors/token.interceptor';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,10 @@ import { TokenInterceptor } from '@interceptors/token.interceptor';
     MessagesModule,
     BrowserAnimationsModule,
     MenubarModule,
-    ButtonModule
+    ButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextModule
   ],
   providers: [
     CookieService,

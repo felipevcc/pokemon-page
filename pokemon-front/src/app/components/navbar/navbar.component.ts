@@ -30,25 +30,6 @@ export class NavbarComponent {
     this.isAuthenticated = this.authService.isAuthenticated();
     if (this.authService.isAuthenticated()) {
       this.getUserData();
-      this.items = [
-        {
-          label: this.authenticatedUser?.firstName || 'User',
-          items: [
-            {
-              label: 'Update data',
-              routerLink: '/update-user'
-            },
-            {
-              label: 'Change password',
-              routerLink: '/change-password'
-            },
-            {
-              label: 'Logout',
-              command: () => this.logout()
-            }
-          ]
-        }
-      ];
     }
   }
 
@@ -56,6 +37,25 @@ export class NavbarComponent {
     this.userService.getUserData().subscribe({
       next: (data: User) => {
         this.authenticatedUser = data;
+        this.items = [
+          {
+            label: 'Hi ' + (this.authenticatedUser?.firstName || 'User') + '!',
+            items: [
+              {
+                label: 'Update data',
+                routerLink: '/update-user'
+              },
+              {
+                label: 'Change password',
+                routerLink: '/change-password'
+              },
+              {
+                label: 'Logout',
+                command: () => this.logout()
+              }
+            ]
+          }
+        ];
       },
       error: (error) => {
         console.error(error);
@@ -65,6 +65,7 @@ export class NavbarComponent {
 
   logout(): void {
     this.authService.logout();
+    this.isAuthenticated = false;
     this.router.navigate([Paths.Pokemons]);
   }
 

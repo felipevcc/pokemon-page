@@ -26,6 +26,8 @@ public class CorsConfig {
         // All headers allowed
         corsConfiguration.setAllowedHeaders(List.of("*"));
 
+        corsConfiguration.addExposedHeader("Authorization");
+
         // Set this CORS configuration on the entire API
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);

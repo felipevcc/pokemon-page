@@ -1,1 +1,48 @@
-<p>signup works!</p>
+<div class="signup-container">
+
+  <div class="signup-container__logo">
+    <img src="assets/images/pokemon-logo.svg" alt="Pokemon logo">
+  </div>
+
+  <div class="signup-container__form-container">
+    <h2>Sign Up</h2>
+    <p>Sign up to have access to all features.</p>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="inputs-section">
+        <div class="form-input">
+            <label for="firstName">First Name</label>
+            <input type="text" pInputText id="firstName" name="firstName" formControlName="firstName" placeholder="Enter first name" autocomplete="off" />
+        </div>
+        <div class="form-input">
+          <label for="lastName">Last Name</label>
+          <input type="text" pInputText id="lastName" name="lastName" formControlName="lastName" placeholder="Enter last name" autocomplete="off" />
+        </div>
+        <div class="form-input">
+          <label for="password">Password</label>
+          <input type="password" pInputText id="password" name="password" formControlName="password" placeholder="Enter password" autocomplete="off" />
+        </div>
+        <div class="form-input">
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="password" pInputText id="confirmPassword" name="confirmPassword" formControlName="confirmPassword" placeholder="Enter password" autocomplete="off" />
+        </div>
+        <div class="form-input">
+          <label for="phoneNumber">Phone Number</label>
+          <input type="text" pInputText id="phoneNumber" name="phoneNumber" formControlName="phoneNumber" placeholder="Enter phone number" autocomplete="off" />
+        </div>
+        <div class="form-input">
+          <label for="email">Email</label>
+          <input type="text" pInputText id="email" name="email" formControlName="email" placeholder="Enter email" autocomplete="off" />
+        </div>
+      </div>
+      <button pButton type="submit" class="p-button-raised p-button-rounded" label="Sign Up" [disabled]="form.invalid"></button>
+    </form>
+
+    <p>Already have an account? <a class="signup-link" (click)="onSignin()">Sign In</a></p>
+    <a class="home-link" (click)="onBack()">Back to home</a>
+
+  </div>
+  
+  <p-messages></p-messages>
+
+</div>

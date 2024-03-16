@@ -5,8 +5,28 @@
   padding: 0;
 
   font-family: var(--font-family);
+
+  --color-primary500: #E2C13D;
+  --color-primary400: #F0C415;
+  --color-primary300: #D8CC9C;
+  --color-primary200: #FFF4C8;
+  --color-primary100: #FFF9E2;
+
+  --color-secondary500: #1054b3;
+  --color-secondary400: #3368B0;
+  --color-secondary300: #007BFF;
+  --color-secondary200: #729dd8;
+  --color-secondary100: #d4e6ff;
+
+  --color-grayscale700: #333333;
+  --color-grayscale600: #686868;
+  --color-grayscale500: #999999;
+  --color-grayscale400: #CCCCCC;
+  --color-grayscale300: #DDDDDD;
+  --color-grayscale200: #EEEEEE;
+  --color-grayscale100: #FFFFFF;
 }
 
 h2 {
-  color: var(--surface-900);
+  color: var(--color-grayscale700);
 }

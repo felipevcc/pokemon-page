@@ -31,7 +31,7 @@ export class AuthService {
    * 
    */
   login(credentials: UserLoginReq): Observable<any> {
-    return this.http.post(`${environment.apiUrl}${UserEndpoints.UserLogin}`, credentials);
+    return this.http.post(`${environment.apiUrl}${UserEndpoints.UserLogin}`, credentials, { observe: 'response' });
   }
 
   /**
@@ -73,7 +73,7 @@ export class AuthService {
         return false;
       }
     });
-    return false;
+    return true;
   }
 
   /**

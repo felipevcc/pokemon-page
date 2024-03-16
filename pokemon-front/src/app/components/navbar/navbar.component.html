@@ -1,18 +1,18 @@
-<div class="navbar">
+<div class="navbar-container">
 
-  <div class="navbar__logo">
+  <div class="navbar-container__logo">
     <a [routerLink]="pokemonsPath"><img src="assets/images/pokemon-logo.svg" alt="Pokemon logo"></a>
   </div>
 
   <div *ngIf="isAuthenticated; else contentBlock">
-    <div class="navbar__options">
+    <div class="navbar-container__options">
       <p-menubar [model]="items"></p-menubar>
     </div>
   </div>
 
   <ng-template #contentBlock>
 
-    <div class="navbar__auth">
+    <div class="navbar-container__auth">
       <button pButton type="button" (click)="onLoginClick()" class="p-button-raised signin" label="Sign In"></button>
       <button pButton type="button" (click)="onSignupClick()" class="p-button-raised signup" label="Sign Up"></button>
     </div>

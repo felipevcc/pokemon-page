@@ -1,1 +1,31 @@
-<p>login works!</p>
+<div class="login-container">
+
+  <div class="login-container__logo">
+    <img src="assets/images/pokemon-logo.svg" alt="Pokemon logo">
+  </div>
+
+  <div class="login-container__form-container">
+    <h2>Sign In</h2>
+    <p>Sign in to have access to all features.</p>
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="form">
+      <div class="form-input">
+        <label for="email">Email</label>
+        <input type="text" pInputText id="email" name="email" formControlName="email" placeholder="Enter email" autocomplete="off" />
+      </div>
+      <div class="form-input">
+          <label for="password">Password</label>
+          <input type="password" pInputText id="password" name="password" formControlName="password" placeholder="Enter password" autocomplete="off" />
+      </div>
+      <button pButton type="submit" class="p-button-raised p-button-rounded" label="Sign In" [disabled]="form.invalid"></button>
+    </form>
+
+    <p>Don't have an account? <a class="signup-link" (click)="onSignup()">Sign Up</a></p>
+    <a class="home-link" (click)="onBack()">Back to home</a>
+
+  </div>
+  
+  <p-messages></p-messages>
+
+</div>
+

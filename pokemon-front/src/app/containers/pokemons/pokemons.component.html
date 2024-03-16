@@ -8,10 +8,10 @@
 
 <ng-template #contentBlock>
 
-  <div class="pokemons">
+  <div class="pokemons-container">
 
-    <div class="pokemons__top">
-      <h2 class="pokemons__top__title">Pokémons</h2>
+    <div class="pokemons-container__top">
+      <h2 class="pokemons-container__top__title">Pokémons</h2>
     </div>
 
     <div *ngIf="pokemonsPage.pokemons; else elseBlock">
@@ -22,7 +22,7 @@
             {{ pokemon.name }}
           </div>
         </div>
-        <p-paginator (onPageChange)="onPageChange($event)" [rows]="pokemonsPage.pageSize" [totalRecords]="pokemonsPage.totalPokemons"></p-paginator>
+        <p-paginator (onPageChange)="onPageChange($event)" [rows]="pokemonsPage.pageSize" [totalRecords]="pokemonsPage.totalPokemons" [rowsPerPageOptions]="[15, 30]"></p-paginator>
       </div>
 
     </div>
