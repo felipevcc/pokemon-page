@@ -31,35 +31,35 @@ Page to consult pokemons with their information and manage users.
 
 Home view to see Pokémons (Unauthenticated user)
 
-![Captura de pantalla 2024-03-16 191738](https://github.com/felipevcc/pokemon-page/assets/95534180/5f05caa6-5ff3-43ac-a17c-3930e7500419)
+![Home view - Unauth user](https://github.com/felipevcc/pokemon-page/assets/95534180/5f05caa6-5ff3-43ac-a17c-3930e7500419)
 
 Login view
 
-![Captura de pantalla 2024-03-16 191645](https://github.com/felipevcc/pokemon-page/assets/95534180/4f74b4ba-0845-4cc9-970b-b66bd5620d88)
+![Login view](https://github.com/felipevcc/pokemon-page/assets/95534180/4f74b4ba-0845-4cc9-970b-b66bd5620d88)
 
 Sign up view
 
-![Captura de pantalla 2024-03-16 191718](https://github.com/felipevcc/pokemon-page/assets/95534180/c47872d4-8c75-479e-a886-59b73512c0cf)
+![Sign up view](https://github.com/felipevcc/pokemon-page/assets/95534180/c47872d4-8c75-479e-a886-59b73512c0cf)
 
 Home view (User logged in)
 
-![Captura de pantalla 2024-03-16 191609](https://github.com/felipevcc/pokemon-page/assets/95534180/289f9e2f-4255-4e58-b59e-6ddef4bf6807)
+![Home view - Auth user](https://github.com/felipevcc/pokemon-page/assets/95534180/289f9e2f-4255-4e58-b59e-6ddef4bf6807)
 
 User options in navbar
 
-![Captura de pantalla 2024-03-16 191906](https://github.com/felipevcc/pokemon-page/assets/95534180/9d6d1867-1396-414d-b022-90ab523ef4e0)
+![User options in navbar](https://github.com/felipevcc/pokemon-page/assets/95534180/9d6d1867-1396-414d-b022-90ab523ef4e0)
 
 Detail view of Pokémon
 
-![Captura de pantalla 2024-03-16 191807](https://github.com/felipevcc/pokemon-page/assets/95534180/3c95e501-43d9-4c6d-ad31-669c45680aff)
+![Detail view of Pokémon](https://github.com/felipevcc/pokemon-page/assets/95534180/3c95e501-43d9-4c6d-ad31-669c45680aff)
 
 User data update view
 
-![Captura de pantalla 2024-03-16 191831](https://github.com/felipevcc/pokemon-page/assets/95534180/494dec1f-e1e2-43e6-bc72-cb9df0a9b4ca)
+![User data update view](https://github.com/felipevcc/pokemon-page/assets/95534180/494dec1f-e1e2-43e6-bc72-cb9df0a9b4ca)
 
 Password change view
 
-![Captura de pantalla 2024-03-16 191845](https://github.com/felipevcc/pokemon-page/assets/95534180/4e83ee97-2f67-4c40-bb19-0005a0ed87d9)
+![Password change view](https://github.com/felipevcc/pokemon-page/assets/95534180/4e83ee97-2f67-4c40-bb19-0005a0ed87d9)
 
 </details>
 
