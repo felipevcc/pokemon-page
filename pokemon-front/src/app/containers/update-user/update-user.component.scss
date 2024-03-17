@@ -1,0 +1,111 @@
+.updateUser-container {
+  position: relative;
+  width: 100%;
+  height: 93.5vh;
+  background-image: linear-gradient(to top, var(--color-secondary200), var(--color-grayscale100) 60%);
+
+  @media (max-height: 690px) {
+    height: auto;
+    padding: 3%;
+  }
+
+  .back-btn {
+    margin-top: 50px;
+    margin-left: 7.5%;
+    z-index: 12;
+    width: 200px;
+  }
+
+  &__form-container {
+    position: relative;
+    height: 470px;
+    width: 600px;
+    margin: auto;
+    margin-top: 5%;
+    padding: 3%;
+    border-radius: 10px;
+    background-color: var(--color-grayscale100);
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.25);
+    text-align: center;
+
+    @media (max-height: 690px) {
+      height: 440px;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-top: 1%;
+      margin-bottom: 1%;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: left;
+
+      .inputs-section {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-row-gap: 2px;
+        grid-column-gap: 40px;
+        width: 100%;
+
+        .form-input {
+          margin-top: 13%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: left;
+          width: 100%;
+
+          label {
+            margin-bottom: 3%;
+            color: var(--color-grayscale700);
+          }
+
+          input {
+            font-family: var(--font-regular);
+          }
+        }
+      }
+
+      button {
+        margin-top: 11%;
+
+        border: none;
+        font-size: 14px;
+        width: 140px;
+        height: 40px;
+        min-height: 40px;
+        background-color: var(--color-secondary300);
+        color: var(--color-grayscale100);
+
+        &:hover {
+          background-color: var(--color-secondary500);
+          transition: all .2s;
+        }
+
+        &:active {
+          background: var(--color-secondary400);
+          box-shadow: inset 0 4px 4px #00000026 !important;
+        }
+
+        &:focus {
+          box-shadow: none;
+        }
+
+        &:focus-visible {
+          box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px #ddcc85, 0 1px 2px 0 black;
+        }
+
+        &:disabled {
+          background-color: var(--color-grayscale300);
+          color: var(--color-grayscale600);
+        }
+      }
+    }
+
+  }
+}
