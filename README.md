@@ -102,6 +102,13 @@ As a resource to make requests from Postman, this is the [`collection file`](htt
 
 <br>
 
+## Demo
+
+To see a summary of the app watch this [video](https://drive.google.com/file/d/1StCBcu8XfMFshN0fGGqJ-QRKF4LyvLnA/view?usp=sharing).
+
+<br>
+
+
 ## Author
 
 * Felipe Villamizar <a href="https://github.com/felipevcc" rel="nofollow"><img align="center" alt="github" src="https://www.vectorlogo.zone/logos/github/github-tile.svg" height="24" /></a>
